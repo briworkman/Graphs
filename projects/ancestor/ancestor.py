@@ -51,18 +51,23 @@
 #                                     first = anc[0]
 #     return first
 
+
 def earliest_ancestor(ancestors, starting_node):
     parents = []
 
     for relationship in ancestors:
+        # if the relationship is equal to the starting node, add it to the parents array
         if relationship[1] == starting_node:
             parents.append(relationship)
-
+    # while the parents array is not empty
     while len(parents) > 0:
+        # pop/dequeue the ancestor in the parents array
         ancestor = parents.pop()
         earlier_ancestor = earliest_ancestor(ancestors, ancestor[0])
+        # if the earlier ancester is greater than -1, add it to the parents array
         if earlier_ancestor > -1:
             parents.append((earlier_ancestor, ancestor[0]))
+        # if the length of the parents array is empty, return the current ancestor
         elif len(parents) == 0:
             return ancestor[0]
 
